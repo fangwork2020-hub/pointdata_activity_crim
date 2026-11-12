@@ -19,6 +19,7 @@ header{border-bottom:2px solid var(--edge);padding-bottom:16px;margin-bottom:18p
 .eyebrow{margin:0 0 4px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-size:13px}
 h1{margin:0;font-size:clamp(28px,4vw,42px);line-height:1.1;letter-spacing:-.01em}
 .sub{margin:8px 0 0;color:var(--muted)}
+.task{margin:14px 0 0;background:var(--panel);border:1.5px solid var(--edge);border-left-width:6px;border-radius:6px;padding:12px 16px;font-size:17px}
 .steps{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 0}
 .steps button{font:inherit;font-weight:700;font-size:15px;background:transparent;color:var(--ink);border:1.5px solid var(--edge);border-radius:999px;padding:8px 16px;cursor:pointer}
 .steps button[aria-pressed="true"]{background:var(--edge);color:var(--panel)}
@@ -57,13 +58,13 @@ button:focus-visible{outline:3px solid var(--y22);outline-offset:2px}
 <header>
   <p class="eyebrow">Point analysis · warm-up</p>
   <h1>Every crime, every dot. Can you read it?</h1>
-  <p class="sub">A Chicago-shaped city with made-up crime data. Work through the five steps and write what you notice on your handout.</p>
+  <p class="sub">A Chicago-shaped city with made-up crime data.</p>
+  <div class="task"><b>Your group’s job:</b> Pick your section below. Explore it, identify the problems with the point data, and be ready to share them with the class.</div>
   <nav class="steps" aria-label="Steps">
-    <button type="button" data-s="1" aria-pressed="true">1 · Crime in 2022</button>
-    <button type="button" data-s="2" aria-pressed="false">2 · Add 2023</button>
-    <button type="button" data-s="3" aria-pressed="false">3 · Crime types</button>
-    <button type="button" data-s="4" aria-pressed="false">4 · Police stations</button>
-    <button type="button" data-s="5" aria-pressed="false">5 · What are the problems?</button>
+    <button type="button" data-s="1" aria-pressed="true">Section 1 · Crime in 2022</button>
+    <button type="button" data-s="2" aria-pressed="false">Section 2 · Add 2023</button>
+    <button type="button" data-s="3" aria-pressed="false">Section 3 · Crime types</button>
+    <button type="button" data-s="4" aria-pressed="false">Section 4 · Police stations</button>
   </nav>
 </header>
 
@@ -76,7 +77,7 @@ button:focus-visible{outline:3px solid var(--y22);outline-offset:2px}
 
   <div>
     <section class="card" id="s1">
-      <h2>Step 1: Crime in 2022</h2>
+      <h2>Section 1: Crime in 2022</h2>
       <p>This map shows every reported crime in the city in 2022: <b id="n22"></b> incidents, one dot each.</p>
       <p class="q">You’re the new police chief. You have 5 extra patrol cars tonight. Where do you send them?</p>
       <p class="note">Take 60 seconds. Then try the buttons.</p>
@@ -88,7 +89,7 @@ button:focus-visible{outline:3px solid var(--y22);outline-offset:2px}
     </section>
 
     <section class="card" id="s2" hidden>
-      <h2>Step 2: Now you have 2023 too</h2>
+      <h2>Section 2: Now you have 2023 too</h2>
       <p>The mayor asks: <b>“Did crime get better or worse, and where?”</b> Here are four ways to show two years of points. Try each one.</p>
       <div class="opts" id="opts">
         <button type="button" class="opt" data-o="top" aria-pressed="true">Add 2023 on top</button>
@@ -101,7 +102,7 @@ button:focus-visible{outline:3px solid var(--y22);outline-offset:2px}
     </section>
 
     <section class="card" id="s3" hidden>
-      <h2>Step 3: Break it down by crime type</h2>
+      <h2>Section 3: Break it down by crime type</h2>
       <p>Each dot now shows what kind of crime it was. The chief wants to plan different responses for robbery and homicide.</p>
       <div class="opts" id="topts">
         <button type="button" class="opt" data-t="all" aria-pressed="true">All types at once</button>
@@ -114,7 +115,7 @@ button:focus-visible{outline:3px solid var(--y22);outline-offset:2px}
     </section>
 
     <section class="card" id="s4" hidden>
-      <h2>Step 4: Add the police stations</h2>
+      <h2>Section 4: Add the police stations</h2>
       <p>The city has six police stations, A to F. A new robbery was just reported at the <b>red ring</b>.</p>
       <p class="q">Which station is closest? Make your guess.</p>
       <div class="opts" id="gopts" style="grid-template-columns:repeat(6,1fr)"></div>
@@ -123,26 +124,6 @@ button:focus-visible{outline:3px solid var(--y22);outline-offset:2px}
       <div class="write">Then discuss: Which part of the city is <b>farthest from any station</b>? Which station do you think handles the <b>most crime</b>? Could you tell just by looking?</div>
     </section>
 
-    <section class="card" id="s5" hidden>
-      <h2>Step 5: What are the problems?</h2>
-      <p class="q">You had every crime, every type and every station on a map. Why was it still hard to answer the chief and the mayor?</p>
-      <div class="write">With your neighbor, list as many problems with point data as you can on your handout. Think about what the dots <b>show</b>, what they <b>hide</b>, and how they could <b>mislead</b>.</div>
-      <p class="note">Go back to any step if it helps.</p>
-      <button type="button" class="reveal" id="bProbs" aria-expanded="false">Show some problems analysts run into</button>
-      <ul class="probs" id="probs">
-        <li><b>Too many dots:</b> the map becomes one blob, so everywhere looks like a hotspot.</li>
-        <li><b>Dots hide each other:</b> one dot can be 1 incident or 40 at the same address.</li>
-        <li><b>Hard to judge density:</b> the eye can’t compare “a lot” with “a lot more.”</li>
-        <li><b>Zoom changes the story:</b> zoomed out it’s a mass; zoomed in it looks spread out.</li>
-        <li><b>Comparing years is hard:</b> on top is a mess, side by side is guesswork, a table loses the “where.”</li>
-        <li><b>Too many types at once:</b> eight colors become noise, and rare but serious crimes disappear.</li>
-        <li><b>Hard to compare types:</b> you can’t tell by eye where each type is centered or how spread out it is.</li>
-        <li><b>Distance by eye is unreliable:</b> two stations can look equally close when they aren’t.</li>
-        <li><b>Which station is busiest?</b> You can’t count thousands of dots per station by looking.</li>
-        <li><b>Our eyes get fooled:</b> we see patterns in random dots and miss real ones.</li>
-      </ul>
-      <p class="note" style="margin-top:12px">Next: the point analysis tools that help with each of these.</p>
-    </section>
   </div>
 </div>
 <footer>All data on this page is made up for teaching. The city outline is only roughly shaped like Chicago.</footer>
@@ -253,14 +234,11 @@ function draw4(){clearFlip();maps.className="maps";maps.innerHTML="";tbox.hidden
   if(checked){const f=x=>(x*KM).toFixed(1)+" km";$("s4ans").innerHTML=`Closest is <b>${ds[0].s[0]}</b> at ${f(ds[0].d)}. Next: ${ds[1].s[0]} at ${f(ds[1].d)}, then ${ds[2].s[0]} at ${f(ds[2].d)}.`+(guess?(guess===ds[0].s[0]?" You got it!":` You guessed ${guess}.`):"");}}
 $("bCheck").addEventListener("click",()=>{checked=true;draw4();});
 
-/* step 5 */
-$("bProbs").addEventListener("click",()=>{const p=$("probs");const v=!p.classList.contains("show");p.classList.toggle("show",v);$("bProbs").setAttribute("aria-expanded",v);$("bProbs").textContent=v?"Hide the list":"Show some problems analysts run into";});
-
 /* navigation */
 let step=1;
 function go(n){step=n;document.querySelectorAll(".steps button").forEach(b=>b.setAttribute("aria-pressed",+b.dataset.s===n));
-  [1,2,3,4,5].forEach(k=>$("s"+k).hidden=n!==k);
-  if(n===1)draw1();else if(n===2)draw2();else if(n===3)draw3();else if(n===4)draw4();else{opt="top";document.querySelectorAll("#opts .opt").forEach(x=>x.setAttribute("aria-pressed",x.dataset.o==="top"));draw2();}}
+  [1,2,3,4].forEach(k=>$("s"+k).hidden=n!==k);
+  if(n===1)draw1();else if(n===2)draw2();else if(n===3)draw3();else draw4();}
 document.querySelectorAll(".steps button").forEach(b=>b.addEventListener("click",()=>go(+b.dataset.s)));
 $("n22").textContent=D22.length.toLocaleString();
 go(1);
